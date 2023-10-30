@@ -9,6 +9,7 @@
 #include "problems/rotate_image.hpp"
 #include "problems/set_matrix_zeros.hpp"
 #include "problems/spiral_matrix.hpp"
+#include "problems/word_search.hpp"
 
 int main()
 {
@@ -44,10 +45,17 @@ int main()
 	std::cout << "--------\n";
 	setZeroes(mat1);
 	*/
+	/*
 	std::vector<std::vector<int>> mat{ {1,2,3}, {4,5,6}, {7,8,9} };
 	support::print_vec(spiralOrder(mat));
 	std::cout << "-----------------\n";
 	std::vector<std::vector<int>> mat1{ {1,2,3,4}, {5,6,7,8}, {9,10,11,12} };
 	support::print_vec(spiralOrder(mat1));
+	*/
+	//std::vector<char> line = { 'A', 'B', "C", "E" };
+	std::vector<std::vector<char>> mat{ {'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'} };
+	std::string word = "SEE";
+	support::print_matrix( mat );
+	std::cout << exist( mat, word );
 	return 0;
 }
