@@ -11,6 +11,8 @@
 #include "problems/spiral_matrix.hpp"
 #include "problems/word_search.hpp"
 
+#include "problems/two_sum.hpp"
+
 int main()
 {
 	//support::print_vec( countBits( 5 ) );
@@ -52,10 +54,19 @@ int main()
 	std::vector<std::vector<int>> mat1{ {1,2,3,4}, {5,6,7,8}, {9,10,11,12} };
 	support::print_vec(spiralOrder(mat1));
 	*/
-	//std::vector<char> line = { 'A', 'B', "C", "E" };
+	/*
 	std::vector<std::vector<char>> mat{ {'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'} };
 	std::string word = "SEE";
 	support::print_matrix( mat );
 	std::cout << exist( mat, word );
+	*/
+	std::vector<int> vec{ 2, 7, 11, 15 };
+	support::print_vec( twoSum( vec, 9 ) );
+	std::cout << "\n";
+	std::vector<int> vec1{ 3, 2, 4 };
+	support::print_vec(twoSum(vec1, 6));
+	std::cout << "\n";
+	std::vector<int> vec2{ 3, 3 };
+	support::print_vec(twoSum(vec2, 6));
 	return 0;
 }

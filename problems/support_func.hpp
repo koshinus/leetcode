@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <bitset>
+#include <set>
+#include <unordered_set>
 
 namespace support
 {
@@ -46,6 +48,24 @@ void print_matrix(const std::vector<std::vector<T>>& matrix)
 	{
 		print_vec(row);
 	}
+}
+
+template<typename T>
+void print_set(const std::unordered_set<T>& set)
+{
+	std::string str = "{";
+	int i = 0;
+	for (auto elem : set)
+	{
+		str += std::to_string( elem.fst );
+		if ( i != (set.size() - 1))
+		{
+			str += ",";
+		}
+		i++;
+	}
+	str += "}";
+	std::cout << str << std::endl;
 }
 
 template<typename T>
