@@ -12,6 +12,8 @@
 #include "problems/word_search.hpp"
 
 #include "problems/two_sum.hpp"
+#include "problems/contains_duplicate.hpp"
+#include "problems/search_in_rotated_array.hpp"
 
 int main()
 {
@@ -60,6 +62,7 @@ int main()
 	support::print_matrix( mat );
 	std::cout << exist( mat, word );
 	*/
+	/*
 	std::vector<int> vec{ 2, 7, 11, 15 };
 	support::print_vec( twoSum( vec, 9 ) );
 	std::cout << "\n";
@@ -68,5 +71,16 @@ int main()
 	std::cout << "\n";
 	std::vector<int> vec2{ 3, 3 };
 	support::print_vec(twoSum(vec2, 6));
+	*/
+	/*
+	std::vector<int> dups{ 1,2,3,4 };
+	std::cout << containsDuplicate( dups ) << "\n";
+	*/
+	/*
+	std::vector<int> vec{1,2,3,4};
+	std::cout << search(vec, 1);
+	*/
+	std::vector<int> vec{ 3,4,1,2 };
+	std::cout << search(vec, 1);
 	return 0;
 }
