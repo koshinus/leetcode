@@ -14,6 +14,7 @@
 #include "problems/two_sum.hpp"
 #include "problems/contains_duplicate.hpp"
 #include "problems/search_in_rotated_array.hpp"
+#include "problems/minimum_in_rotated.hpp"
 
 int main()
 {
@@ -77,10 +78,29 @@ int main()
 	std::cout << containsDuplicate( dups ) << "\n";
 	*/
 	/*
-	std::vector<int> vec{1,2,3,4};
-	std::cout << search(vec, 1);
-	*/
+	std::vector<int> vec{5,6,7,8};
+	std::cout << search(vec, 7) << "\n";
+	std::vector<int> vec1{1,2,3,4};
+	std::cout << search(vec1, -1);
+	//*/
+	/*
 	std::vector<int> vec{ 3,4,1,2 };
-	std::cout << search(vec, 1);
+	std::cout << search(vec, 1) << "\n";
+	std::vector<int> vec1{ 4,5,6,7,0,1,2 };
+	std::cout << search(vec1, 4) << "\n";
+	std::vector<int> vec2{ 1,3 };
+	std::cout << search(vec2, 3) << "\n";
+	std::vector<int> vec3{ 1,3,5,6,7,89,98 };
+	std::cout << bin_search(vec3, 98, 0, vec3.size());
+	std::vector<int> vec4{ 3,5,1 };
+	std::cout << search(vec4, 5) << "\n";
+	std::vector<int> vec5{ 4,5,6,7,0,1,2 };
+	std::cout << search(vec5, 7) << "\n";
+	//*/
+
+	/*
+	std::vector<int> vec5{ 4,5,6,7,0,1,2 };
+	std::cout << findMin(vec5) << "\n";
+	//*/
 	return 0;
 }
