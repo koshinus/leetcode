@@ -2,7 +2,7 @@
 
 #include <vector>
 
-int get_start_in_rotated_array(std::vector<int>& nums)
+int get_start_in_rotated_array1(std::vector<int>& nums)
 {
 	int left = 0, right = nums.size() - 1;
 	while (left < right && nums[left] > nums[right])
@@ -24,7 +24,7 @@ int get_start_in_rotated_array(std::vector<int>& nums)
 
 int findMin(std::vector<int>& nums)
 {
-	return nums[get_start_in_rotated_array(nums)];
+	return nums[get_start_in_rotated_array1(nums)];
 }
 
 /*

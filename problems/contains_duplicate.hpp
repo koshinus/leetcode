@@ -14,6 +14,8 @@ bool containsDuplicate(std::vector<int>& nums)
 	return nums_check.size() != nums.size();
 }
 
+// TODO: try write with O(1) space complexity, using xor operation
+
 /*
 * Status: accepted
 * Runtime: 106ms, Beats 40.3%

@@ -15,6 +15,8 @@
 #include "problems/contains_duplicate.hpp"
 #include "problems/search_in_rotated_array.hpp"
 #include "problems/minimum_in_rotated.hpp"
+#include "problems/product_of_arr_except_self.hpp"
+#include "problems/container_with_most_water.hpp"
 
 int main()
 {
@@ -102,5 +104,14 @@ int main()
 	std::vector<int> vec5{ 4,5,6,7,0,1,2 };
 	std::cout << findMin(vec5) << "\n";
 	//*/
+	/*
+	std::vector<int> vec{1,2,3,4};
+	support::print_vec( productExceptSelf(vec) );
+	std::vector<int> vec1{-1,1,0,-3,3};
+	support::print_vec(productExceptSelf(vec1));
+	*/
+	std::vector<int> vec{1,8,6,2,5,4,8,3,7};
+	std::vector<int> vec2{1, 1};
+	std::cout << maxArea(vec) << " " << maxArea(vec2);
 	return 0;
 }
