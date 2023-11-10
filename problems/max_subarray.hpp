@@ -8,7 +8,7 @@ void get_sum_with_previuos(std::vector<int>& max_sums, int cur_idx, const std::v
 {
 	if (cur_idx == 0)
 	{
-		max_sums[0] = nums[0];
+		max_sums[0] = std::max( 0, nums[0] );
 		return;
 	}
 	int cur_val = nums[cur_idx];

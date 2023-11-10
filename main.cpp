@@ -132,6 +132,7 @@ int main()
 				<< maxSubArray(vec1) << "\n"
 				<< maxSubArray(vec2) << "\n"
 				<< maxSubArray(vec3) << "\n"
-				<< maxSubArray(vec4) << "\n";
+				<< maxSubArray(vec4) << "\n"
+				<< maxSubArray(vec5) << "\n";
 	return 0;
 }
