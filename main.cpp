@@ -17,6 +17,8 @@
 #include "problems/minimum_in_rotated.hpp"
 #include "problems/product_of_arr_except_self.hpp"
 #include "problems/container_with_most_water.hpp"
+#include "problems/buy_and_sell_stocks.hpp"
+#include "problems/max_subarray.hpp"
 
 int main()
 {
@@ -110,8 +112,26 @@ int main()
 	std::vector<int> vec1{-1,1,0,-3,3};
 	support::print_vec(productExceptSelf(vec1));
 	*/
+	/*
 	std::vector<int> vec{1,8,6,2,5,4,8,3,7};
 	std::vector<int> vec2{1, 1};
 	std::cout << maxArea(vec) << " " << maxArea(vec2);
+	*/
+	/*
+	std::vector<int> vec{7,1,5,3,6,4};
+	std::vector<int> vec1{ 7,6,4,3,1 };
+	std::cout << maxProfit(vec) << "\n" << maxProfit(vec1);
+	*/
+	std::vector<int> vec{-2,1,-3,4,-1,2,1,-5,4};
+	std::vector<int> vec1{ 1 };
+	std::vector<int> vec2{ 5,4,-1,7,8 };
+	std::vector<int> vec3{ -2,1 };
+	std::vector<int> vec4{ -3,-4,-5,-6,-7 };
+	std::vector<int> vec5{ -1,1,2,1 }; // wrong answer: 3 instead of 4
+	std::cout << maxSubArray(vec) << "\n" 
+				<< maxSubArray(vec1) << "\n"
+				<< maxSubArray(vec2) << "\n"
+				<< maxSubArray(vec3) << "\n"
+				<< maxSubArray(vec4) << "\n";
 	return 0;
 }

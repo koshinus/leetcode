@@ -3,7 +3,7 @@
 #include <vector>
 #include <set>
 
-#include "problems/support_func.hpp"
+#include "support_func.hpp"
 
 void setRowZeros(std::vector<std::vector<int>>& matrix, int row)
 {

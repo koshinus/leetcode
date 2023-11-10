@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "problems/support_func.hpp"
+#include "support_func.hpp"
 
 enum class current_direction: std::uint8_t
 {

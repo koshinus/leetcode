@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "problems/support_func.hpp"
+#include "support_func.hpp"
 
 void rotate(std::vector<std::vector<int>>& matrix)
 {

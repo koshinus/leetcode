@@ -4,7 +4,7 @@
 #include <vector>
 #include <set>
 #include <unordered_set>
-#include "problems/support_func.hpp"
+#include "support_func.hpp"
 
 struct int_p
 {
