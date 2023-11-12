@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <iostream>
+#include "support_func.hpp"
 
 std::vector<int> algo_with_division(std::vector<int>& nums)
 {
@@ -70,6 +72,18 @@ std::vector<int> productExceptSelf(std::vector<int>& nums)
 	return algo_with_division(nums);
 }
 
+namespace product_except_self
+{
+
+void run_tests()
+{
+    std::vector<int> vec{1,2,3,4};
+    support::print_vec( productExceptSelf(vec) );
+    std::vector<int> vec1{-1,1,0,-3,3};
+    support::print_vec(productExceptSelf(vec1));
+}
+
+}
 
 /*
 * Status: accepted

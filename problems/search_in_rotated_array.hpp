@@ -95,6 +95,7 @@ int search_for_small(std::vector<int>& nums, int target)
 		if (nums[2] == target) return 2;
 		return -1;
 	}
+    return -1;
 }
 
 int search(std::vector<int>& nums, int target)
@@ -116,6 +117,32 @@ int search(std::vector<int>& nums, int target)
 		return left_search_res;
 	}
 	return bin_search(nums, target, start, nums.size());
+}
+
+namespace search_in_rotated
+{
+
+void run_tests()
+{
+    std::vector<int> vec6{5,6,7,8};
+    std::cout << search(vec6, 7) << "\n";
+    std::vector<int> vec7{1,2,3,4};
+    std::cout << search(vec7, -1);
+
+    std::vector<int> vec{ 3,4,1,2 };
+    std::cout << search(vec, 1) << "\n";
+    std::vector<int> vec1{ 4,5,6,7,0,1,2 };
+    std::cout << search(vec1, 4) << "\n";
+    std::vector<int> vec2{ 1,3 };
+    std::cout << search(vec2, 3) << "\n";
+    std::vector<int> vec3{ 1,3,5,6,7,89,98 };
+    std::cout << bin_search(vec3, 98, 0, vec3.size());
+    std::vector<int> vec4{ 3,5,1 };
+    std::cout << search(vec4, 5) << "\n";
+    std::vector<int> vec5{ 4,5,6,7,0,1,2 };
+    std::cout << search(vec5, 7) << "\n";
+}
+
 }
 
 /*

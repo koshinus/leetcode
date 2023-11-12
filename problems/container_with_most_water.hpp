@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
 
 int get_container_area(const std::vector<int>& container, int left_border, int right_border)
 {
@@ -50,6 +51,17 @@ int maxArea(std::vector<int>& height)
 	return linear_solution(height);
 }
 
+namespace max_area
+{
+
+void run_tests()
+{
+    std::vector<int> vec{1,8,6,2,5,4,8,3,7};
+    std::vector<int> vec2{1, 1};
+    std::cout << maxArea(vec) << " " << maxArea(vec2);
+}
+
+}
 
 /*
 * Status: accepted

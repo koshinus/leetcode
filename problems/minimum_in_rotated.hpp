@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
 
 int get_start_in_rotated_array1(std::vector<int>& nums)
 {
@@ -26,6 +27,18 @@ int findMin(std::vector<int>& nums)
 {
 	return nums[get_start_in_rotated_array1(nums)];
 }
+
+namespace find_min
+{
+
+void run_tests()
+{
+    std::vector<int> vec5{ 4,5,6,7,0,1,2 };
+    std::cout << findMin(vec5) << "\n";
+}
+
+}
+
 
 /*
 * Status: accepted

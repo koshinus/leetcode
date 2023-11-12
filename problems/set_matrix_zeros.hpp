@@ -75,6 +75,19 @@ void setZeroes(std::vector<std::vector<int>>& matrix)
 	support::print_matrix(matrix);
 }
 
+namespace set_zeros
+{
+
+void run_tests()
+{
+    std::vector<std::vector<int>> mat{ {1,1,1}, {1,0,1}, {1,1,1} };
+    std::vector<std::vector<int>> mat1{ {0,1,2,0}, {3,4,5,2}, {1,3,1,5} };
+    setZeroes(mat);
+    std::cout << "--------\n";
+    setZeroes(mat1);
+}
+
+}
 
 /*
 * Status: accepted

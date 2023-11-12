@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <unordered_set>
+#include <iostream>
 
 bool containsDuplicate(std::vector<int>& nums)
 {
@@ -15,6 +16,18 @@ bool containsDuplicate(std::vector<int>& nums)
 }
 
 // TODO: try write with O(1) space complexity, using xor operation
+
+
+namespace contains_duplicates
+{
+
+void run_tests()
+{
+    std::vector<int> dups{ 1,2,3,4 };
+    std::cout << containsDuplicate( dups ) << "\n";
+}
+
+}
 
 /*
 * Status: accepted

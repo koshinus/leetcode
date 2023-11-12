@@ -76,6 +76,20 @@ std::vector<int> spiralOrder(std::vector<std::vector<int>>& matrix)
 	return result;
 }
 
+namespace spiral_order
+{
+
+void run_tests()
+{
+    std::vector<std::vector<int>> mat{ {1,2,3}, {4,5,6}, {7,8,9} };
+    support::print_vec(spiralOrder(mat));
+    std::cout << "-----------------\n";
+    std::vector<std::vector<int>> mat1{ {1,2,3,4}, {5,6,7,8}, {9,10,11,12} };
+    support::print_vec(spiralOrder(mat1));
+}
+
+}
+
 /*
 * Status: accepted
 * Runtime: 0ms?, Beats 100%

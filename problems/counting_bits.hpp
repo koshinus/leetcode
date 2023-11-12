@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include "support_func.hpp"
+
 int count_bits_for_number(int k)
 {
 	int res = 0;
@@ -25,6 +27,16 @@ std::vector<int> countBits(int n)
 		result.emplace_back( count_bits_for_number( i ) );
 	}
 	return result;
+}
+
+namespace count_bits
+{
+
+void run_tests()
+{
+    support::print_vec( countBits( 5 ) );
+}
+
 }
 
 /*

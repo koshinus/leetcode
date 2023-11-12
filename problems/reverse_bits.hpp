@@ -1,6 +1,8 @@
 #pragma once
 
+#include <iostream>
 #include <cstdint>
+#include "support_func.hpp"
 
 std::uint32_t reverseBits(std::uint32_t n)
 {
@@ -16,6 +18,18 @@ std::uint32_t reverseBits(std::uint32_t n)
         }
     }
     return res;
+}
+
+namespace reverse_bits
+{
+
+void run_tests()
+{
+    auto answer = reverseBits(4294967293);
+    support::print_val_binary(answer);
+    std::cout << "\n"  << answer;
+}
+
 }
 
 /*

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
 
 struct precompute_info
 {
@@ -158,4 +159,17 @@ int maxProfit(std::vector<int>& prices)
 	}
 	int max_profit = 0;
 	*/
+}
+
+
+namespace max_profit
+{
+
+void run_tests()
+{
+    std::vector<int> vec{7,1,5,3,6,4};
+    std::vector<int> vec1{ 7,6,4,3,1 };
+    std::cout << maxProfit(vec) << "\n" << maxProfit(vec1);
+}
+
 }

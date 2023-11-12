@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 #include "support_func.hpp"
 
 void rotate(std::vector<std::vector<int>>& matrix)
@@ -16,6 +17,19 @@ void rotate(std::vector<std::vector<int>>& matrix)
 	support::print_matrix(matrix);
 }
 
+namespace rotate_image
+{
+
+void run_tests()
+{
+    std::vector<std::vector<int>> mat{ {1,2,3}, {4,5,6}, {7,8,9} };
+    std::vector<std::vector<int>> mat1{ {1,2,3,4}, {5,6,7,8}, {9,10,11,12}, {13,14,15,16} };
+    rotate(mat);
+    std::cout << "--------\n";
+    rotate(mat1);
+}
+
+}
 
 /*
 * Status: accepted

@@ -53,6 +53,23 @@ std::vector<int> twoSum(std::vector<int>& nums, int target)
 	return { -1, -1 };
 }
 
+namespace two_sum
+{
+
+void run_tests()
+{
+    std::vector<int> vec{ 2, 7, 11, 15 };
+    support::print_vec( twoSum( vec, 9 ) );
+    std::cout << "\n";
+    std::vector<int> vec1{ 3, 2, 4 };
+    support::print_vec(twoSum(vec1, 6));
+    std::cout << "\n";
+    std::vector<int> vec2{ 3, 3 };
+    support::print_vec(twoSum(vec2, 6));
+}
+
+}
+
 /*
 * Status: accepted
 * Runtime: 511ms, Beats 5.14%

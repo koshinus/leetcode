@@ -1,36 +1,29 @@
 #pragma once
 
 #include <iostream>
-#include "support_func.hpp"
 
 int getSum(int a, int b)
 {
-	/*
-	support::print_val_binary(a & b);
-	support::print_val_binary(a | b);
-	support::print_val_binary(a ^ b);
-	support::print_val_binary((a ^ b) | (a & b));
-	std::cout << std::endl;
-	support::print_val_binary(~a & b);
-	support::print_val_binary(~a | b);
-	support::print_val_binary(~a ^ b);
-	support::print_val_binary((a ^ b) | (a & b));
-	std::cout << std::endl;
-	support::print_val_binary(a & ~b);
-	support::print_val_binary(a | ~b);
-	support::print_val_binary(a ^ ~b);
-	support::print_val_binary((a ^ b) | (a & b));
-	std::cout << std::endl;
-	support::print_val_binary(a + b);
-	return a + b;
-	*/
-
 	while (b != 0) {
 		unsigned int tmp = (a & b);
 		a = a ^ b;
 		b = tmp << 1;
 	}
 	return a;
+}
+
+namespace get_sum
+{
+
+void run_tests()
+{
+    std::cout << getSum(2, 3);
+    std::cout << "new num\n";
+    std::cout << getSum(2, 2);
+    std::cout << "new num\n";
+    std::cout << getSum(20, 28);
+}
+
 }
 
 /*

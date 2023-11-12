@@ -5,6 +5,8 @@
 #include <set>
 #include <stack>
 
+#include "support_func.hpp"
+
 using LiterasBoard = std::vector<std::vector<char>>;
 
 struct Indexes
@@ -159,4 +161,18 @@ bool exist(LiterasBoard& board, std::string word)
 	WordCheck checker( std::move( word ) );
 	Graph graph( std::move( board ) );
 	return check_via_dfs<Graph, _Stack<Graph::vertice_type>, WordCheck>( graph, checker );
+}
+
+
+namespace word_search
+{
+
+void run_tests()
+{
+    std::vector<std::vector<char>> mat{ {'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'} };
+    std::string word = "SEE";
+    support::print_matrix( mat );
+    std::cout << exist( mat, word );
+}
+
 }
