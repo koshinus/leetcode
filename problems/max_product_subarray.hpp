@@ -3,17 +3,28 @@
 #include <vector>
 #include <iostream>
 
+int get_current_product(int cur_val, int cur_product)
+{
+    if (cur_val > 0)
+    {
+        return cur_product * cur_val;
+    }
+}
+
+// TODO: analyze and understand more precisely
 int maxProduct(std::vector<int>& nums)
 {
-    int max_in_nums = nums[0], max_product = 1, cur_product = 1;
-    for (int i = 0; i < nums.size(); i++)
+    int max_global = nums[0], max_cur, min_cur, max_pre = nums[0], min_pre = nums[0];
+    for (int i = 1; i < nums.size(); i++)
     {
         int cur_val = nums[i];
-        max_in_nums = std::max( max_in_nums, cur_val );
-        cur_product = std::max( cur_val * cur_product, 1 );
-        max_product = std::max( max_product, cur_product );
+        max_cur = std::max( std::max(max_pre * cur_val, min_pre*cur_val), cur_val );
+        min_cur = std::min( std::min(max_pre * cur_val, min_pre*cur_val), cur_val );
+        max_global = std::max( max_global, max_cur );
+        max_pre = max_cur;
+        min_pre = min_cur;
     }
-    return ( max_product > 1 ) ? max_product : max_in_nums;
+    return max_global;
 }
 
 namespace max_product
@@ -31,3 +42,9 @@ void run_tests()
 }
 
 }
+
+/*
+* Status: accepted
+* Runtime: 7ms, Beats 36.26%
+* Memory: 14.19 Mb, Beats 39.51%
+*/
