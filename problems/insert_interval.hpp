@@ -2,9 +2,16 @@
 
 #include <vector>
 
-bool value_is_in_interval( const std::vector<int> interval, int val )
+#include "support_func.hpp"
+
+bool value_is_in_interval( const std::vector<int>& interval, int val )
 {
-    return (interval[0] <= val) && (interval[1] >= val);
+    return (interval[0] <= val) && (val <= interval[1]);
+}
+
+bool value_is_between_intervals(const std::vector<int>& interval1, const std::vector<int>& interval2, int val)
+{
+    return value_is_in_interval({ interval1[1], interval2[0] }, val );
 }
 
 std::vector<std::vector<int>> merge_last_pos(std::vector<std::vector<int>>&& intervals, std::vector<int>&& newInterval)
@@ -53,37 +60,86 @@ std::vector<std::vector<int>> merge_interval(std::vector<std::vector<int>>&& int
     std::vector<int> interval_for_insert = { std::min( left_interval[ 0 ], inserted_interval_left ),
                                              std::max( right_interval[ 1 ], inserted_interval_right ) };
     auto it_begin = intervals.begin();
-    intervals.insert( intervals.erase( it_begin + left_interval_pos, it_begin + right_interval_pos ), interval_for_insert );
+    intervals.insert( intervals.erase( it_begin + left_interval_pos, it_begin + ( right_interval_pos + 1 ) ), interval_for_insert );
     return std::move( intervals );
 }
 
 std::vector<std::vector<int>> insert(std::vector<std::vector<int>>& intervals, std::vector<int>& newInterval)
 {
     int left_pos = 0, right_pos = intervals.size();
+    int new_int_left = newInterval[0], new_int_right = newInterval[1];
+
+    if (intervals.empty())
+    {
+        return { {new_int_left, new_int_right} };
+    }
+    if (new_int_right < intervals[0][0])
+    {
+        intervals.insert(intervals.begin(), std::move(newInterval));
+        return std::move(intervals);
+    }
+    if (new_int_left > intervals[right_pos - 1][1])
+    {
+        intervals.emplace_back( std::move(newInterval) );
+        return std::move(intervals);
+    }
+
     for ( int i = 0; i < intervals.size(); i++ )
     {
-        if ( value_is_in_interval( intervals[ i ], newInterval[0] ) )
+        std::cout << "[" << intervals[i][0] << "," << intervals[i][1] << "]\n";
+        if ( value_is_in_interval( intervals[ i ], new_int_left) )
         {
+            std::cout << "1cur pos is " << i << "\n";
+            left_pos = i;
+            break;
+        }
+        if (i == 0)
+        {
+            continue;
+        }
+        if (value_is_between_intervals(intervals[i - 1], intervals[i], new_int_left))
+        {
+            std::cout << "2cur pos is " << i << "\n";
             left_pos = i;
             break;
         }
     }
     for ( int i = left_pos; i < intervals.size(); i++ )
     {
-        if ( value_is_in_interval( intervals[ i ], newInterval[1] ) )
+        std::cout << "[" << intervals[i][0] << "," << intervals[i][1] << "]\n";
+        if ( value_is_in_interval( intervals[ i ], new_int_right) )
         {
+            std::cout << "3cur pos is " << i << "\n";
+            right_pos = i;
+            break;
+        }
+        if (i == 0)
+        {
+            continue;
+        }
+        if (value_is_between_intervals(intervals[i - 1], intervals[i], new_int_right))
+        {
+            std::cout << "4cur pos is " << i << "\n";
             right_pos = i;
             break;
         }
     }
-    if (right_pos == intervals.size())
+    int pos_diff = right_pos - left_pos;
+    std::cout << "left is " << left_pos << " right pos is " << right_pos << " pos diff is " << pos_diff << "\n";
+    //return {};
+    ///*
+    if ((pos_diff > 1) || (pos_diff == 1 && value_is_in_interval(intervals[right_pos], new_int_right)))
     {
-        return merge_last_pos( std::move( intervals ), std::move( newInterval ) );
+        return merge_interval(std::move(intervals), std::move(newInterval), left_pos, right_pos);
     }
     else
     {
-        return merge_interval( std::move( intervals ), std::move( newInterval ), left_pos, right_pos );
+        auto& interval = intervals[ left_pos ];
+        interval[0] = std::min(interval[0], new_int_left);
+        interval[1] = std::max(interval[1], new_int_right);
+        return std::move( intervals );
     }
+    //*/
 }
 
 
@@ -94,11 +150,35 @@ namespace insert_interval
     {
         std::vector< std::vector<int>> intervals{ {1,3}, {6,9} };
         std::vector<int> new_interval{ 2,5 };
-        auto res1 = insert( intervals, new_interval );
+        auto res = insert( intervals, new_interval );
+        std::cout << "[";
+        for (auto& vec : res)
+        {
+            support::print_vec(vec);
+        }
+        std::cout << "]\n";
 
+        ///*
         std::vector< std::vector<int>> intervals1{ {1,2},{3,5},{6,7},{8,10},{12,16} };
         std::vector<int> new_interval1{ 4,8 };
-        auto res2 = insert(intervals1, new_interval1);
+        auto res1 = insert(intervals1, new_interval1);
+        std::cout << "[";
+        for (auto& vec : res1)
+        {
+            support::print_vec(vec);
+        }
+        std::cout << "]\n";
+        //*/
+
+        std::vector< std::vector<int>> intervals2{ {1,5} };
+        std::vector<int> new_interval2{ 2,7 };
+        auto res2 = insert(intervals2, new_interval2);
+        std::cout << "[";
+        for (auto& vec : res2)
+        {
+            support::print_vec(vec);
+        }
+        std::cout << "]\n";
     }
 
 }
