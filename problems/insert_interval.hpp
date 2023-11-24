@@ -46,6 +46,10 @@ PositionInfo get_value_position_info( const Intervals& intervals, int start_pos,
 {
     int last = intervals.size() - 1;
     ValPositionState state;
+    if (intervals[start_pos][0] > val)
+    {
+        return { ValPositionState::BETWEEN, start_pos };
+    }
     for (int i = start_pos; i < last; i++)
     {
         state = get_val_position_state(intervals[i], intervals[i+1], val);
@@ -64,10 +68,35 @@ PositionInfo get_value_position_info( const Intervals& intervals, int start_pos,
         return { ValPositionState::OUTSIDE, last };
 }
 
-Intervals merge_result(Intervals&& intervals, const PositionInfo& left, const PositionInfo& right)
+Intervals merge_result(Intervals&& intervals, const PositionInfo& left, const PositionInfo& right, const OneInterval& newInterval)
 {
     int left_pos = left.index, right_pos = right.index;
 
+    if (right.state == ValPositionState::OUTSIDE && right_pos == intervals.size() - 1)
+    {
+        auto& left_interval = intervals[left_pos];
+        std::vector<int> interval_for_insert = { std::min(left_interval[0], newInterval[0]), newInterval[1] };
+        auto it_begin = intervals.begin();
+        intervals.insert(intervals.erase(it_begin + left_pos, intervals.end()), interval_for_insert);
+        return std::move(intervals);
+    }
+    if ( ( left_pos == right_pos ) || 
+        (
+            (left_pos + 1) == right_pos &&
+            (left.state == ValPositionState::BETWEEN ||
+            right.state == ValPositionState::BETWEEN)
+        ) )
+    {
+        intervals[left_pos][0] = std::min(newInterval[0], intervals[left_pos][0]);
+        intervals[left_pos][1] = std::max(newInterval[1], intervals[left_pos][1]);
+        return std::move(intervals);
+    }
+    auto& left_interval = intervals[left_pos];
+    auto& right_interval = intervals[right_pos];
+    std::vector<int> interval_for_insert = { std::min(left_interval[0], newInterval[0]),
+                                             std::max(right_interval[1], newInterval[1]) };
+    auto it_begin = intervals.begin();
+    intervals.insert(intervals.erase(it_begin + left_pos, it_begin + (right_pos + 1)), interval_for_insert);
     return std::move(intervals);
 }
 
@@ -218,10 +247,16 @@ Intervals second_algo(Intervals& intervals, OneInterval& newInterval)
         intervals.emplace_back(std::move(newInterval));
         return std::move(intervals);
     }
+    auto left_pos_info = get_value_position_info(intervals, 0, new_int_left);
+    std::cout << "Left interval pos " << left_pos_info.index << "\n";
+    auto right_pos_info = get_value_position_info(intervals, left_pos_info.index, new_int_right);
+    std::cout << "Right interval pos " << right_pos_info.index << " state is " << static_cast<int>(right_pos_info.state) << "\n";
+    return merge_result(std::move( intervals ), left_pos_info, right_pos_info, newInterval);
 }
+
 std::vector<std::vector<int>> insert(std::vector<std::vector<int>>& intervals, std::vector<int>& newInterval)
 {
-    return first_algo( intervals, newInterval );
+    return second_algo( intervals, newInterval );
 }
 
 
@@ -267,6 +302,26 @@ namespace insert_interval
         auto res3 = insert(intervals3, new_interval3);
         std::cout << "[";
         for (auto& vec : res3)
+        {
+            support::print_vec(vec);
+        }
+        std::cout << "]\n";
+
+        std::vector< std::vector<int>> intervals4{ {1,5}, {6,8} };
+        std::vector<int> new_interval4{ 0,9 };
+        auto res4 = insert(intervals4, new_interval4);
+        std::cout << "[";
+        for (auto& vec : res4)
+        {
+            support::print_vec(vec);
+        }
+        std::cout << "]\n";
+
+        std::vector< std::vector<int>> intervals5{ {0,0}, {2,4}, {9,9} };
+        std::vector<int> new_interval5{ 0,7 };
+        auto res5 = insert(intervals5, new_interval5);
+        std::cout << "[";
+        for (auto& vec : res5)
         {
             support::print_vec(vec);
         }
