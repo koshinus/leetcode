@@ -3,9 +3,7 @@
 #include <vector>
 
 #include "support_func.hpp"
-
-using OneInterval = std::vector<int>;
-using Intervals = std::vector<OneInterval>;
+#include "intervals_structures.hpp"
 
 bool value_is_in_interval( const OneInterval& interval, int val )
 {
@@ -319,7 +317,7 @@ namespace insert_interval
 
         std::vector< std::vector<int>> intervals5{ {0,0}, {2,4}, {9,9} };
         std::vector<int> new_interval5{ 0,7 };
-        auto res5 = insert(intervals5, new_interval5);
+        auto res5 = insert(intervals5, new_interval5);// TODO: debug this case
         std::cout << "[";
         for (auto& vec : res5)
         {

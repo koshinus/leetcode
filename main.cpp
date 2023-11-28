@@ -22,6 +22,7 @@
 #include "problems/max_product_subarray.hpp"
 
 #include "problems/insert_interval.hpp"
+#include "problems/merge_intervals.hpp"
 
 int main()
 {
@@ -41,6 +42,8 @@ int main()
     //max_profit::run_tests();
     //max_subarray::run_tests();
     //max_product::run_tests();
-    insert_interval::run_tests();
+    //insert_interval::run_tests();
+
+    merge_intervals::run_tests();
 	return 0;
 }
