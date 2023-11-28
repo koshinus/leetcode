@@ -21,6 +21,9 @@
 #include "problems/max_subarray.hpp"
 #include "problems/max_product_subarray.hpp"
 
+#include "problems/insert_interval.hpp"
+#include "problems/merge_intervals.hpp"
+
 int main()
 {
     //count_bits::run_tests();
@@ -38,6 +41,9 @@ int main()
     //max_area::run_tests();
     //max_profit::run_tests();
     //max_subarray::run_tests();
-    max_product::run_tests();
+    //max_product::run_tests();
+    //insert_interval::run_tests();
+
+    merge_intervals::run_tests();
 	return 0;
 }
