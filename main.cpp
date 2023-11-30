@@ -23,6 +23,8 @@
 
 #include "problems/insert_interval.hpp"
 #include "problems/merge_intervals.hpp"
+#include "problems/non_overlapping_intervals.hpp"
+#include "problems/remove_nth_from_list.hpp"
 
 int main()
 {
@@ -43,7 +45,8 @@ int main()
     //max_subarray::run_tests();
     //max_product::run_tests();
     //insert_interval::run_tests();
-
-    merge_intervals::run_tests();
+    //merge_intervals::run_tests();
+    //non_overlap_intervals::run_tests();
+    remove_nth::run_tests();
 	return 0;
 }
