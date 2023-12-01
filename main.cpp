@@ -24,7 +24,9 @@
 #include "problems/insert_interval.hpp"
 #include "problems/merge_intervals.hpp"
 #include "problems/non_overlapping_intervals.hpp"
+
 #include "problems/remove_nth_from_list.hpp"
+#include "problems/reorder_list.hpp"
 
 int main()
 {
@@ -41,12 +43,13 @@ int main()
     //find_min::run_tests();
     //product_except_self::run_tests();
     //max_area::run_tests();
-    //max_profit::run_tests();
+    max_profit::run_tests();
     //max_subarray::run_tests();
     //max_product::run_tests();
     //insert_interval::run_tests();
     //merge_intervals::run_tests();
     //non_overlap_intervals::run_tests();
-    remove_nth::run_tests();
+    //remove_nth::run_tests();
+    //reorder_list::run_tests();
 	return 0;
 }

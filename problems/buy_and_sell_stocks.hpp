@@ -141,24 +141,20 @@ int algo_with_ascending_segments(std::vector<int>& prices)
 	return max_val;
 }
 
-int kadane_algo()
+int kadane_algo(std::vector<int>& prices)
 {
-	// TODO: write and understand
-	return 0;
+	int max_profit = 0, min_price = prices[0];
+	for (int price : prices)
+	{
+		min_price = std::min(price, min_price);
+		max_profit = std::max(max_profit, price - min_price);
+	}
+	return max_profit;
 }
 
 int maxProfit(std::vector<int>& prices)
 {
-	return algo_with_ascending_segments(prices);
-	/*
-	int best_day_to_buy = get_index_of_the_first_increased_val(prices),
-		best_day_to_sell = prices.size() - 1;
-	if (best_day_to_buy == -1)
-	{
-		return 0;
-	}
-	int max_profit = 0;
-	*/
+	return kadane_algo(prices);
 }
 
 
