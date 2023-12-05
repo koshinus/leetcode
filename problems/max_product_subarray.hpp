@@ -3,14 +3,6 @@
 #include <vector>
 #include <iostream>
 
-int get_current_product(int cur_val, int cur_product)
-{
-    if (cur_val > 0)
-    {
-        return cur_product * cur_val;
-    }
-}
-
 // TODO: analyze and understand more precisely
 int maxProduct(std::vector<int>& nums)
 {

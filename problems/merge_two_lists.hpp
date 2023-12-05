@@ -2,12 +2,23 @@
 
 #include "list_structures.hpp"
 
+struct NodePair
+{
+    ListNode* fst;
+    ListNode* snd;
+};
+
+NodePair nextStep(ListNode* dest, ListNode* src)
+{
+    dest = new ListNode(src->val);
+    return NodePair{ dest->next, src->next };
+}
+
 void pushRest(ListNode* dest, ListNode* src)
 {
-    ListNode* dest_next = nullptr;
     while (src)
     {
-        dest = src;
+        dest->next = new ListNode(src->val);
         dest = dest->next;
         src = src->next;
     }
@@ -21,37 +32,39 @@ ListNode* mergeTwoLists(ListNode* list1, ListNode* list2)
     if (!list2)
         return list1;
 
-    ListNode* res = nullptr, * res_head = res;
-    ListNode* cur_fst = list1, * cur_snd = list2;
-    int fst_val = 0, snd_val = 0;
+    ListNode *res = nullptr, *res_head = nullptr;
+    ListNode *cur_fst = list1, *cur_snd = list2;
+    if (cur_fst->val <= cur_snd->val)
+    {
+        res = new ListNode(cur_fst->val);
+        cur_fst = cur_fst->next;
+    }
+    else
+    {
+        res = new ListNode(cur_snd->val);
+        cur_snd = cur_snd->next;
+    }
+    res_head = res;
     while (cur_fst && cur_snd)
     {
-        if (cur_fst->val >= cur_snd->val)
+        if (cur_fst->val <= cur_snd->val)
         {
-            res = cur_fst;
+            res->next = new ListNode(cur_fst->val);
             cur_fst = cur_fst->next;
         }
         else
         {
-            res = cur_snd;
+            res->next = new ListNode(cur_snd->val);
             cur_snd = cur_snd->next;
         }
         res = res->next;
     }
-    if (cur_fst)
-    {
-        pushRest(res, cur_fst);
-    }
-    else
-    {
-        pushRest(res, cur_snd);
-    }
+    pushRest(res, (cur_fst ? cur_fst : cur_snd ));
     return res_head;
 }
 
 namespace merge_lists
 {
-
     void test1()
     {
         ListNode node1(4);
@@ -76,12 +89,21 @@ namespace merge_lists
         print_list(mergeTwoLists(nullptr, &node1));
     }
 
+    void test4()
+    {
+        ListNode node1(2);
+        ListNode node2(1);
+        print_list(mergeTwoLists(&node1, &node2));
+    }
+
     void run_tests()
     {
         test1();
         std::cout << "\n";
+        test4();
+/*        std::cout << "\n";
         test2();
         std::cout << "\n";
-        test3();
+        test3();*/
     }
 }

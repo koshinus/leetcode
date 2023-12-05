@@ -27,6 +27,9 @@
 
 #include "problems/remove_nth_from_list.hpp"
 #include "problems/reorder_list.hpp"
+#include "problems/merge_two_lists.hpp"
+
+#include "problems/tree_serialization.hpp"
 
 int main()
 {
@@ -43,7 +46,7 @@ int main()
     //find_min::run_tests();
     //product_except_self::run_tests();
     //max_area::run_tests();
-    max_profit::run_tests();
+    //max_profit::run_tests();
     //max_subarray::run_tests();
     //max_product::run_tests();
     //insert_interval::run_tests();
@@ -51,5 +54,8 @@ int main()
     //non_overlap_intervals::run_tests();
     //remove_nth::run_tests();
     //reorder_list::run_tests();
+    //tree_seria::run_tests();
+    merge_lists::run_tests();
+
 	return 0;
 }
