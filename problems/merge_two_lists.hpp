@@ -8,10 +8,10 @@ struct NodePair
     ListNode* snd;
 };
 
-NodePair nextStep(ListNode* dest, ListNode* src)
+NodePair nextStep(ListNode** dest, ListNode* src)
 {
-    dest = new ListNode(src->val);
-    return NodePair{ dest->next, src->next };
+    *dest = new ListNode(src->val);
+    return NodePair{ (*dest)->next, src->next };
 }
 
 void pushRest(ListNode* dest, ListNode* src)

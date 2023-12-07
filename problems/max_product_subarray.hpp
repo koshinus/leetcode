@@ -29,8 +29,7 @@ void run_tests()
     std::vector<int> vec2{-3,-1,-1};
     std::cout << maxProduct(vec) << "\n"
               << maxProduct(vec1) << "\n"
-              << maxProduct(vec2) //WRONG: should be 3, not -1
-        ;
+              << maxProduct(vec2);
 }
 
 }

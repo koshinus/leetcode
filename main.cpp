@@ -31,6 +31,8 @@
 
 #include "problems/tree_serialization.hpp"
 
+#include "problems/longest_pal_substring.hpp"
+
 int main()
 {
     //count_bits::run_tests();
@@ -55,7 +57,8 @@ int main()
     //remove_nth::run_tests();
     //reorder_list::run_tests();
     //tree_seria::run_tests();
-    merge_lists::run_tests();
+    //merge_lists::run_tests();
+    longest_pal::run_tests();
 
 	return 0;
 }
