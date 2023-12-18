@@ -54,6 +54,12 @@ StrIndexes getIndexesForCurrent_(const std::string& s, int i)
         return getIndexesForEdges(s, i);
     }
     auto [left, right] = getRepeatingSequenceIndexes_(s, i);
+    //std::cout << "Str size 1: " << s.size() << " " << left << " " << right << "\n";
+    if (left == 0 && right == s_size - 1)
+    {
+        //std::cout << "Whole string consist from one char\n";
+        return { left, right };
+    }
     if (left > 0 && right < s_size && s[left - 1] != s[right + 1])
     {
         return { left, right };
@@ -66,10 +72,20 @@ StrIndexes getIndexesForCurrent_(const std::string& s, int i)
     return { left, right };
 }
 
+bool checkIfAllStringFromOneChar(const std::string& s)
+{
+    for (int i = 0; i < s.size() - 1; i++)
+    {
+        if (s[i] != s[i + 1])
+            return false;
+    }
+    return true;
+}
+
 std::string longestPalindrome(std::string s)
 {
     int s_size = s.size();
-    if (s_size == 1)
+    if (s_size == 1 || checkIfAllStringFromOneChar(s))
         return s;
     if (s_size == 2)
     {
@@ -100,14 +116,16 @@ namespace longest_pal
 
     void run_tests()
     {
-        std::cout << longestPalindrome("babad") << '\n' // should be bab or aba
+        std::cout 
+            << longestPalindrome("babad") << '\n' // should be bab or aba
             << longestPalindrome("cbbd") << '\n' // should be bb
             << longestPalindrome("a") << '\n' // should be a
             << longestPalindrome("ac") << '\n' // should be a
             << longestPalindrome("cadabbuuuuuubbai") << '\n' // should be abbuuuuuubba
             << longestPalindrome("dgshjagdgpolkyyyyyyyyyykl") << '\n' // should be lkyyyyyyyyyykl
             << longestPalindrome("cadabbuuuuuubbo") << '\n' // should be bbuuuuuubb
-            << longestPalindrome("aaaa") << '\n'; // should be aaaa
+            << longestPalindrome("aaaa") << '\n'
+            << longestPalindrome("abbcccbbbcaaccbababcbcabca") << '\n'; // should be bbcccbbb
     }
 
 }
