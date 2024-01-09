@@ -33,6 +33,8 @@
 
 #include "problems/longest_pal_substring.hpp"
 
+#include "problems/longest_subseq.hpp"
+
 int main()
 {
     //count_bits::run_tests();
@@ -58,7 +60,8 @@ int main()
     //reorder_list::run_tests();
     //tree_seria::run_tests();
     //merge_lists::run_tests();
-    longest_pal::run_tests();
+    //longest_pal::run_tests();
+    longest_subseq::run_tests();
 
 	return 0;
 }
