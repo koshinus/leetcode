@@ -5,90 +5,29 @@
 
 #include "support_func.hpp"
 
-int findNextMin(const std::vector<int>& nums, int idx, int threshold)
+int getLongestFrom(const std::vector<int>& nums, const std::vector<int>& paths, int from)
 {
-    if (idx >= nums.size())
-        return -1;
-    //std::cout << "Index is " << idx << " start val is " << nums[idx] << " threshold is " << threshold << "\n";
-    int idx_min = -1,//idx,
-        min_el = INT_MAX,//nums[idx],
-        cur_val;
-    for (int i = idx; i < nums.size(); i++)
+    int res = 0, threshold = nums[from];
+    for (int i = from; i < nums.size(); i++)
     {
-        cur_val = nums[i];
-        if (cur_val <= threshold)
+        if (nums[i] <= threshold)
             continue;
-        //std::cout << min_el << "/" << cur_val << "\n";
-        if (cur_val < min_el)
-        {
-            idx_min = i;
-            min_el = cur_val;
-        }
+        res = std::max(paths[i], res);
     }
-    //std::cout << idx_min << "->" << min_el << "\n";
-    return idx_min;
-}
-
-int lengthFromIdx1(const std::vector<int>& nums, std::map<int, int>& min_idxs, int i)
-{
-    int res = 0;
-    do
-    {
-        res++;
-        auto it = min_idxs.find( i );
-        if (it != min_idxs.end())
-        {
-            i = it->second;
-            continue;
-        }
-        min_idxs[i] = findNextMin(nums, i + 1, nums[i]);
-        i = min_idxs[i];
-        //std::cout << "Res is " << res << " i is " << i << "\n";
-    } while (i != -1);
-    return res;
-}
-
-int lengthFromIdxOpt(const std::vector<int>& nums, std::vector<int>& min_idxs, int i)
-{
-    int res = 0;
-    do
-    {
-        res++;
-        if (min_idxs[i] != -1)
-        {
-            i = min_idxs[i];
-            continue;
-        }
-        min_idxs[i] = findNextMin(nums, i + 1, nums[i]);
-        i = min_idxs[i];
-        //std::cout << "Res is " << res << " i is " << i << "\n";
-    } while (i != -1);
-    return res;
-}
-
-int lengthFromIdx(const std::vector<int>& nums, int i)
-{
-    int res = 0;
-    do
-    {
-        res++;
-        i = findNextMin(nums, i + 1, nums[i]);
-        //std::cout << "Res is " << res << " i is " << i << "\n";
-    } while (i != -1);
     return res;
 }
 
 int lengthOfLIS(std::vector<int>& nums)
 {
-    //std::map<int, int> min_idxs;
-    std::vector<int> min_idxs(nums.size(), -1);
-    int largest = 1;
-    for (int i = 0; i < nums.size(); i++)
+    std::vector<int> longest_paths( nums.size(), 0 );
+    int res = 1;
+    for (int i = nums.size() - 1; i >= 0; i--)
     {
-        //largest = std::max(largest, lengthFromIdx(nums, min_idxs, i));
-        largest = std::max(largest, lengthFromIdx(nums, i));
+        longest_paths[i] = 1 + getLongestFrom(nums, longest_paths, i);
+        res = std::max(res, longest_paths[i]);
     }
-    return largest;
+    //support::print_vec(longest_paths);
+    return res;
 }
 
 namespace longest_subseq
@@ -140,3 +79,9 @@ namespace longest_subseq
         test6();
     }
 }
+
+/*
+* Status: accepted
+* Runtime: 131ms, Beats 64.63%
+* Memory: 10.75 Mb, Beats 77.94%
+*/
