@@ -1,4 +1,7 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
+
 #include "problems/support_func.hpp"
 
 #include "problems/counting_bits.hpp"
@@ -34,6 +37,7 @@
 #include "problems/longest_pal_substring.hpp"
 
 #include "problems/longest_subseq.hpp"
+#include "problems/longest_substring.hpp"
 
 int main()
 {
@@ -61,7 +65,8 @@ int main()
     //tree_seria::run_tests();
     //merge_lists::run_tests();
     //longest_pal::run_tests();
-    longest_subseq::run_tests();
+    //longest_subseq::run_tests();
+    longest_substr::run_tests();
 
 	return 0;
 }
