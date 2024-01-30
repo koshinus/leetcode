@@ -38,6 +38,7 @@
 
 #include "problems/longest_subseq.hpp"
 #include "problems/longest_substring.hpp"
+#include "problems/coin_change.hpp"
 
 int main()
 {
@@ -66,7 +67,8 @@ int main()
     //merge_lists::run_tests();
     //longest_pal::run_tests();
     //longest_subseq::run_tests();
-    longest_substr::run_tests();
+    //longest_substr::run_tests();
+    coin_change::run_tests();
 
 	return 0;
 }
