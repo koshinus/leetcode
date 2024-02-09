@@ -39,6 +39,8 @@
 #include "problems/longest_subseq.hpp"
 #include "problems/longest_substring.hpp"
 #include "problems/coin_change.hpp"
+#include "problems/combination_sum.hpp"
+#include "problems/decoding_ways.hpp"
 
 int main()
 {
@@ -68,7 +70,9 @@ int main()
     //longest_pal::run_tests();
     //longest_subseq::run_tests();
     //longest_substr::run_tests();
-    coin_change::run_tests();
+    //coin_change::run_tests();
+    //combination_sum::run_tests();
+    decode_ways::run_tests();
 
 	return 0;
 }
