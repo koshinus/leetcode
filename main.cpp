@@ -41,6 +41,7 @@
 #include "problems/coin_change.hpp"
 #include "problems/combination_sum.hpp"
 #include "problems/decoding_ways.hpp"
+#include "problems/word_break.hpp"
 
 int main()
 {
@@ -72,7 +73,8 @@ int main()
     //longest_substr::run_tests();
     //coin_change::run_tests();
     //combination_sum::run_tests();
-    decode_ways::run_tests();
+    //decode_ways::run_tests();
+    word_break::run_tests();
 
 	return 0;
 }

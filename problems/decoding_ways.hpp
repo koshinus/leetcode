@@ -6,27 +6,22 @@
 
 #include "support_func.hpp"
 
+namespace wrong_algo
+{
+
 int countForTwoSymbols(char first, char second)
 {
-    if (first == '0')
+    int num = (first - '0') * 10 + (second - '0');
+    if (num == 0)
+        return -1;
+    if (num < 10 || (num > 20 && num % 10 == 0))
         return 0;
-    int num = (first - '0')*10 + (second - '0');
-    std::cout << "Num is " << num << "\n";
-    if (num > 20 && num % 10 == 0)
-    {
-        //std::cout << "ww-0\n";
-        return 0;
-    }
     if (num == 10 || num == 20 || num > 26)
-    {
-        //std::cout << "ww-1\n";
         return 1;
-    }
-    //std::cout << "ww-2\n";
     return 2;
 }
 
-void countNextPos(std::vector<int>& vars, const std::string& s, int cur_pos)
+void countNextPos_(std::vector<int>& vars, const std::string& s, int cur_pos)
 {
     int s_size = s.size();
     if (cur_pos >= s_size)
@@ -35,7 +30,7 @@ void countNextPos(std::vector<int>& vars, const std::string& s, int cur_pos)
     if (cur_pos == 0)
     {
         vars[cur_pos] = 1;
-        countNextPos(vars, s, cur_pos + 1);
+        countNextPos_(vars, s, cur_pos + 1);
         return;
     }
     res_for_two = countForTwoSymbols(s[cur_pos - 1], s[cur_pos]);
@@ -46,6 +41,42 @@ void countNextPos(std::vector<int>& vars, const std::string& s, int cur_pos)
         //if (vars[cur_pos - 1] == 0)
         //    return;
         vars[cur_pos] = std::max( vars[cur_pos - 1] - 1, 0 );
+        countNextPos_(vars, s, cur_pos + 1);
+        return;
+    }
+    case 1:
+    {
+        vars[cur_pos] = vars[cur_pos - 1];
+        countNextPos_(vars, s, cur_pos + 1);
+        return;
+    }
+    case 2:
+    {
+        vars[cur_pos] = vars[cur_pos - 1] + 1;
+        countNextPos_(vars, s, cur_pos + 1);
+        return;
+    }
+    default: break;
+    }
+}
+
+void countNextPos(std::vector<int>& vars, const std::string& s, int cur_pos)
+{
+    int s_size = s.size();
+    if (cur_pos >= s_size)
+        return;
+    if (cur_pos == 0)
+    {
+        vars[cur_pos] = 1;
+        countNextPos(vars, s, cur_pos + 1);
+        return;
+    }
+    int res_for_two = countForTwoSymbols(s[cur_pos - 1], s[cur_pos]);
+    switch (res_for_two)
+    {
+    case 0:
+    {
+        vars[cur_pos] = std::max(vars[cur_pos - 1] - 1, 0);
         countNextPos(vars, s, cur_pos + 1);
         return;
     }
@@ -59,35 +90,38 @@ void countNextPos(std::vector<int>& vars, const std::string& s, int cur_pos)
     {
         vars[cur_pos] = vars[cur_pos - 1] + 1;
         countNextPos(vars, s, cur_pos + 1);
+        countNextPos(vars, s, cur_pos + 2);
         return;
     }
-    default: break;
+    case -1:
+    default:
+        return;
     }
 }
 
-void countNextPos(std::vector<int>& vars, const std::string& s)
+void countForNextPos(std::vector<int>& vars, const std::string& s, int start_idx)
 {
-    vars[0] = 1;
     int res_for_two;
     int last_idx = s.size() - 1;
-    for (int i = 1; i < s.size(); i++)
+    for (int i = start_idx; i < s.size(); i+=2)
     {
         res_for_two = countForTwoSymbols(s[i - 1], s[i]);
+        if (res_for_two == -1)
+            return;
         if (res_for_two == 0)
-        {
-            if (vars[i - 1] == 0)
-                return;
             vars[i] = std::max(vars[i - 1] - 1, 0);
-        }
         if (res_for_two == 1)
             vars[i] = vars[i - 1];
+        if (res_for_two == 2)
+            vars[i] = vars[i - 1] + 1;
+        /*
         if (res_for_two == 2)
         {
             if (i == last_idx && s.size() > 3)
                 vars[i] = vars[i - 1] + 2;
             else
                 vars[i] = vars[i - 1] + 1;
-        }
+        }*/
     }
 }
 
@@ -98,9 +132,33 @@ int numDecodings(std::string s)
     if (s.size() == 1)
         return 1;
     std::vector<int> variants_at_pos(s.size(), 0);
-    countNextPos(variants_at_pos, s);
+    variants_at_pos[0] = 1;
+    //countNextPos(variants_at_pos, s, 0);
+    countForNextPos(variants_at_pos, s, 1);
+    countForNextPos(variants_at_pos, s, 2);
     support::print_vec(variants_at_pos);
     return variants_at_pos.back();
+}
+
+}
+
+int numDecodings(std::string s)
+{
+    std::vector<int> dp(s.size() + 1, 0);
+    dp[0] = 1;
+    dp[1] = s[0] == '0' ? 0 : 1;
+    int way1, way2, last_val;
+    for (int i = 2; i <= s.size(); i++)
+    {
+        way1 = s[i - 1] == '0' ? 0 : dp[i - 1];
+        last_val = (s[i - 2] - '0') * 10 + (s[i - 1] - '0');
+        if (last_val == 0)
+            return 0;
+        way2 = (last_val > 0 && last_val <= 26 && s[i - 2] != '0') ? dp[i - 2] : 0;
+        dp[i] = way1 + way2;
+    }
+    support::print_vec(dp);
+    return dp.back();
 }
 
 namespace decode_ways
@@ -167,7 +225,7 @@ namespace decode_ways
 
 	void run_tests()
 	{
-        /*
+        ///*
         test1();
         test2();
         test3();
@@ -179,7 +237,13 @@ namespace decode_ways
         test9();
         test10();
         //*/
-        //test11();
+        test11();
         test12();
 	}
 }
+
+/*
+* Status: accepted
+* Runtime: 4ms, Beats 22.07%
+* Memory: 7.53 Mb, Beats 26.47%
+*/
