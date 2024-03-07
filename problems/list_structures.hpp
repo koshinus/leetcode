@@ -11,6 +11,13 @@ struct ListNode
 	ListNode(int x, ListNode* next) : val(x), next(next) {}
 };
 
+ListNode* pushNode(ListNode** node, ListNode** res)
+{
+	*res = new ListNode((*node)->val);
+	(*node) = (*node)->next;
+	return *res;
+}
+
 void print_list(ListNode* head)
 {
 	while (head)

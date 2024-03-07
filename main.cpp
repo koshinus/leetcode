@@ -31,6 +31,7 @@
 #include "problems/remove_nth_from_list.hpp"
 #include "problems/reorder_list.hpp"
 #include "problems/merge_two_lists.hpp"
+#include "problems/merge_k_lists.hpp"
 
 #include "problems/tree_serialization.hpp"
 
@@ -42,6 +43,9 @@
 #include "problems/combination_sum.hpp"
 #include "problems/decoding_ways.hpp"
 #include "problems/word_break.hpp"
+#include "problems/house_robber2.hpp"
+
+#include "problems/trie_impl.hpp"
 
 int main()
 {
@@ -68,13 +72,16 @@ int main()
     //reorder_list::run_tests();
     //tree_seria::run_tests();
     //merge_lists::run_tests();
+    //merge_k_lists::run_tests();
     //longest_pal::run_tests();
     //longest_subseq::run_tests();
     //longest_substr::run_tests();
     //coin_change::run_tests();
     //combination_sum::run_tests();
     //decode_ways::run_tests();
-    word_break::run_tests();
+    //word_break::run_tests();
+    //house_robber2::run_tests();
+    trie_implementation::run_tests();
 
 	return 0;
 }

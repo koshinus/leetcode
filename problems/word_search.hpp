@@ -5,7 +5,7 @@
 #include <set>
 #include <stack>
 
-#include "support_func.hpp"
+//#include "support_func.hpp"
 
 using LiterasBoard = std::vector<std::vector<char>>;
 
@@ -107,7 +107,7 @@ private:
 	bool indexes_is_adecvate( const Indexes& idxs ) const
 	{
 		return idxs.i >= 0 && idxs.j >= 0 && 
-				idxs.i < _board.size() && idxs.j < _board[0].size();
+				idxs.i < _board.size() && idxs.j < _board.front().size();
 	}
 	
 	bool already_visited( Indexes child_idxs ) const

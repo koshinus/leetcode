@@ -2,65 +2,63 @@
 
 #include "list_structures.hpp"
 
-struct NodePair
-{
-    ListNode* fst;
-    ListNode* snd;
-};
-
-NodePair nextStep(ListNode** dest, ListNode* src)
-{
-    *dest = new ListNode(src->val);
-    return NodePair{ (*dest)->next, src->next };
-}
-
 void pushRest(ListNode* dest, ListNode* src)
 {
     while (src)
     {
-        dest->next = new ListNode(src->val);
-        dest = dest->next;
-        src = src->next;
+        dest = pushNode(&src, &dest->next);
     }
 }
+
+ListNode* mergeTwoLists_(ListNode* list1, ListNode* list2)
+{
+    if (!list1)
+        return list2;
+    if (!list2)
+        return list1;
+
+    ListNode *res = nullptr, *res_head = nullptr;
+    pushNode(list1->val <= list2->val ? &list1 : &list2, &res);
+    res_head = res;
+    while (list1 && list2)
+    {
+        res = pushNode( list1->val <= list2->val ? &list1 : &list2, &res->next );
+    }
+    ListNode* rest_list = list1 ? list1 : list2;
+    while (rest_list)
+    {
+        res = pushNode( &rest_list, &res->next );
+    }
+    return res_head;
+}
+
+std::vector<ListNode> m_list;
 
 ListNode* mergeTwoLists(ListNode* list1, ListNode* list2)
 {
     if (!list1)
         return list2;
-
     if (!list2)
         return list1;
 
-    ListNode *res = nullptr, *res_head = nullptr;
-    ListNode *cur_fst = list1, *cur_snd = list2;
-    if (cur_fst->val <= cur_snd->val)
+    m_list.clear();
+    ListNode** cur_node = list1->val <= list2->val ? &list1 : &list2;
+    m_list.emplace_back((*cur_node)->val);
+    (*cur_node) = (*cur_node)->next;
+    while (true)
     {
-        res = new ListNode(cur_fst->val);
-        cur_fst = cur_fst->next;
+        if ( !(list1 && list2) ) cur_node = list1 ? &list1 : &list2;
+        else cur_node = list1->val <= list2->val ? &list1 : &list2;
+        if (!*cur_node) break;
+        m_list.emplace_back( (*cur_node)->val );
+        //m_list[m_list.size() - 2].next = *cur_node;
+        (*cur_node) = (*cur_node)->next;
     }
-    else
+    for (int i = 0; i < m_list.size() - 1; i++)
     {
-        res = new ListNode(cur_snd->val);
-        cur_snd = cur_snd->next;
+        m_list[i].next = &m_list[i + 1];
     }
-    res_head = res;
-    while (cur_fst && cur_snd)
-    {
-        if (cur_fst->val <= cur_snd->val)
-        {
-            res->next = new ListNode(cur_fst->val);
-            cur_fst = cur_fst->next;
-        }
-        else
-        {
-            res->next = new ListNode(cur_snd->val);
-            cur_snd = cur_snd->next;
-        }
-        res = res->next;
-    }
-    pushRest(res, (cur_fst ? cur_fst : cur_snd ));
-    return res_head;
+    return m_list.data();
 }
 
 namespace merge_lists
@@ -100,10 +98,11 @@ namespace merge_lists
     {
         test1();
         std::cout << "\n";
-        test4();
-/*        std::cout << "\n";
         test2();
         std::cout << "\n";
-        test3();*/
+        test3();
+        std::cout << "\n";
+        test4();
+        //*/
     }
 }

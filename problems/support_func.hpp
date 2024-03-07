@@ -25,6 +25,21 @@ void print_vec(const std::vector<T>& vec)
 	str += "]";
 	std::cout << str << std::endl;
 }
+template<>
+void print_vec<char>(const std::vector<char>& vec)
+{
+	std::string str = "[";
+	for (size_t i = 0; i < vec.size(); i++)
+	{
+		str += char(vec[i]);
+		if (i != (vec.size() - 1))
+		{
+			str += ",";
+		}
+	}
+	str += "]";
+	std::cout << str << std::endl;
+}
 
 template<typename T>
 void print_val_binary(const T& val)
